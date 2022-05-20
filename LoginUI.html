@@ -71,7 +71,6 @@
           <button class="login-button" id="login-button">Login</button>
         </div>
       </form>
-      <span class="login-status">ID, Password를 입력하십시오</span>
     </section>
     <script type="text/javascript">
       function setup(htmlComponent) {
@@ -83,15 +82,11 @@
         loginSubmit.addEventListener("submit", function (event) {
           event.preventDefault();
           if (!id.value) {
-            loginStatusText = "ID를 입력하십시오";
             id.focus();
           } else if (!password.value) {
             password.focus();
-            loginStatusText = "Password를 입력하십시오";
-          } else {
-            loginStatusText = "Good!";
-            htmlComponent.Data = [id.value, password.value];
           }
+          htmlComponent.Data = [id.value, password.value];
           loginStatus.innerText = loginStatusText;
         });
       }

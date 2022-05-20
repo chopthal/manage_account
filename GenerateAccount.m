@@ -8,17 +8,18 @@ function [isGenerated, stateMsg] = GenerateAccount(id, password, tier)
 isGenerated = false;
 stateMsg = '';
 
+if isempty(id); stateMsg = 'Please enter your ID'; return; end
+if isempty(password); stateMsg = 'Please enter your Password'; return; end
+
 MIN_PASSWORD_LENGTH = 5;
 MAX_PASSWORD_LENGTH = 20;
 
-if length(password) < MIN_PASSWORD_LENGTH    
-    isGenerated = false;
+if length(password) < MIN_PASSWORD_LENGTH        
     stateMsg = sprintf('Password should be longer than %d words\n', MIN_PASSWORD_LENGTH);
     return;
 end
 
-if length(password) > MAX_PASSWORD_LENGTH
-    isGenerated = false;
+if length(password) > MAX_PASSWORD_LENGTH    
     stateMsg = sprintf('Password should be shorter than %d words\n', MAX_PASSWORD_LENGTH);
     return;
 end
@@ -34,8 +35,7 @@ end
 if isempty(fieldnames(Accounts))    
 end
 
-if isfield(Accounts, id)    
-    isGenerated = false;
+if isfield(Accounts, id)        
     stateMsg = 'Exist ID';
     return;
 end

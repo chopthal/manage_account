@@ -85,7 +85,6 @@
           <button class="login-button" id="login-button">Sign-up</button>
         </div>
       </form>
-      <span class="login-status">ID, Password를 입력하십시오</span>
     </section>
     <script type="text/javascript">
       function setup(htmlComponent) {
@@ -93,25 +92,19 @@
         const id = document.querySelector("#id-input");
         const password = document.querySelector("#password-input");
         const tier = document.querySelector("#tier-select");
-        const loginStatus = document.querySelector(".login-status");
         id.focus();
         loginSubmit.addEventListener("submit", function (event) {
           event.preventDefault();
           if (!id.value) {
-            loginStatusText = "ID를 입력하십시오";
             id.focus();
           } else if (!password.value) {
             password.focus();
-            loginStatusText = "Password를 입력하십시오";
-          } else {
-            loginStatusText = "Good!";
-            htmlComponent.Data = [
-              id.value,
-              password.value,
-              tier.options[tier.options.selectedIndex].value,
-            ];
           }
-          loginStatus.innerText = loginStatusText;
+          htmlComponent.Data = [
+            id.value,
+            password.value,
+            tier.options[tier.options.selectedIndex].value,
+          ];
         });
       }
     </script>
