@@ -6,23 +6,12 @@ function [isGenerated, stateMsg] = GenerateAccount(id, password, tier)
 % tier : string
 
 isGenerated = false;
-stateMsg = '';
 
 if isempty(id); stateMsg = 'Please enter your ID'; return; end
 if isempty(password); stateMsg = 'Please enter your Password'; return; end
 
-MIN_PASSWORD_LENGTH = 5;
-MAX_PASSWORD_LENGTH = 20;
-
-if length(password) < MIN_PASSWORD_LENGTH        
-    stateMsg = sprintf('Password should be longer than %d words\n', MIN_PASSWORD_LENGTH);
-    return;
-end
-
-if length(password) > MAX_PASSWORD_LENGTH    
-    stateMsg = sprintf('Password should be shorter than %d words\n', MAX_PASSWORD_LENGTH);
-    return;
-end
+[isValid, stateMsg] = ValidatePassword(id, password);
+if ~isValid; return; end
 
 Accounts = struct;
 hashedPassword = StringToHashedHex(password);
@@ -44,5 +33,6 @@ Accounts.(id).Password = hashedPassword;
 Accounts.(id).Tier = tier;
 save('accounts.mat', 'Accounts');
 isGenerated = true;
+stateMsg = 'Your account is generated successfully';
 
 end
