@@ -1,38 +1,27 @@
-function [isGenerated, stateMsg] = GenerateAccount(id, password, tier)
+function [isGenerated, stateMsg, newAccountStruct] = GenerateAccount(id, password, tier, prevAccountStruct)
+    % isGenerated = GenerateAccount(id, password, tier)
+    % id : string
+    % password : string
+    % tier : string
+    
+    isGenerated = false;
+    newAccountStruct = '';
+    if isempty(id); stateMsg = 'Please enter your ID'; return; end
 
-% isGenerated = GenerateAccount(id, password, tier)
-% id : string
-% password : string
-% tier : string
-
-isGenerated = false;
-
-if isempty(id); stateMsg = 'Please enter your ID'; return; end
-if isempty(password); stateMsg = 'Please enter your Password'; return; end
-
-[isValid, stateMsg] = ValidatePassword(id, password);
-if ~isValid; return; end
-
-Accounts = struct;
-hashedPassword = StringToHashedHex(password);
-
-if isfile('accounts.mat')
-    loadedVariable = load('accounts.mat');
-    Accounts = loadedVariable.Accounts;
-end
-
-if isempty(fieldnames(Accounts))    
-end
-
-if isfield(Accounts, id)        
-    stateMsg = 'Exist ID';
-    return;
-end
-
-Accounts.(id).Password = hashedPassword;
-Accounts.(id).Tier = tier;
-save('accounts.mat', 'Accounts');
-isGenerated = true;
-stateMsg = 'Your account is generated successfully';
-
+    if isempty(password); stateMsg = 'Please enter your Password'; return; end
+    
+    [isValid, stateMsg] = ValidateId(id);
+    if ~isValid; return; end
+    
+    [isValid, stateMsg] = ValidatePassword(id, password);
+    if ~isValid; return; end
+    
+    hashedPassword = StringToHashedHex(password);
+    if isfield(prevAccountStruct, id); stateMsg = 'Exist ID'; return; end
+    
+    newAccountStruct = prevAccountStruct;
+    newAccountStruct.(id).Password = hashedPassword;
+    newAccountStruct.(id).Tier = tier;
+    isGenerated = true;
+    stateMsg = 'Your account is generated successfully';
 end
