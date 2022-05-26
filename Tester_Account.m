@@ -1,5 +1,5 @@
-id = 'user8';
-password = 'asdi          ojf asΔiodj＆';
+id = 'admin';
+password = '>dVTN;o8ooD7[pdC';
 tier = 'Admin';
 [isGenerated, stateMsg] = GenerateAccount(id, password, tier);
 
