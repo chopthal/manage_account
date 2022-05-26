@@ -1,5 +1,4 @@
 function [isValid, stateMsg] = ValidatePassword(id, password)
-
     isValid = false;
     stateMsg = '';
     MIN_PASSWORD_LENGTH = 8;
@@ -38,5 +37,4 @@ function [isValid, stateMsg] = ValidatePassword(id, password)
     end
 
     isValid = true;
-
 end
