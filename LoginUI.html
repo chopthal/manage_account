@@ -13,13 +13,14 @@
         align-items: center;
         justify-content: center;
         width: 250px;
-        height: 80px;
+        height: 150px;
         position: relative;
       }
       .login {
         margin: auto;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: center;
         width: 100%;
         height: 100%;
         position: relative;
@@ -28,7 +29,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 70%;
+        width: 100%;
+        height: 50%;
         position: relative;
       }
       .login > div > input {
@@ -41,22 +43,41 @@
 
       .login-button-box {
         position: relative;
-        margin-left: 5px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        width: 30%;
+        width: 100%;
+        height: 25%;
+        margin-top: -15px;
       }
+
       .login-button {
         width: 100%;
         height: 100%;
         background-color: aquamarine;
-        border-radius: 10%;
+        border-radius: 5px;
         border: 0;
+        margin-top: 5px;
       }
 
       .login-button:hover {
         cursor: pointer;
         background-color: aqua;
+      }
+
+      .checkbox-box {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        height: 25%;
+        position: relative;
+      }
+
+      #visualize-password-checkbox {
+        margin: 0;
+        margin-top: 3px;
+      }
+      .visualize-checkbox-label {
+        font-size: small;
+        margin-left: 3px;
       }
     </style>
   </head>
@@ -66,6 +87,14 @@
         <div class="input-box">
           <input type="text" id="id-input" placeholder="ID" />
           <input type="password" id="password-input" placeholder="Password" />
+        </div>
+        <div class="checkbox-box">
+          <input type="checkbox" id="visualize-password-checkbox" />
+          <label
+            class="visualize-checkbox-label"
+            for="visualize-password-checkbox"
+            >Visualize password</label
+          >
         </div>
         <div class="login-button-box">
           <button class="login-button" id="login-button">Login</button>
@@ -77,6 +106,19 @@
         const loginSubmit = document.querySelector(".login");
         const id = document.querySelector("#id-input");
         const password = document.querySelector("#password-input");
+
+        const visualizePassword = document.querySelector(
+          "#visualize-password-checkbox"
+        );
+
+        visualizePassword.addEventListener("change", (event) => {
+          if (event.currentTarget.checked) {
+            password.type = "text";
+          } else {
+            password.type = "password";
+          }
+        });
+
         id.focus();
         loginSubmit.addEventListener("submit", function (event) {
           event.preventDefault();
