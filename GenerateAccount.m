@@ -30,7 +30,8 @@ function [isGenerated, stateMsg, newAccountStruct] = GenerateAccount(id, passwor
 
     [isValid, stateMsg] = ValidateEmailName(emailName);
     if ~isValid; return; end
-
+    
+    phoneNumber(strfind(phoneNumber, '-')) = ''; % Delete all '-'s
     [isValid, stateMsg] = ValidatePhoneNumber(phoneNumber);
     if ~isValid; return; end
     
@@ -44,7 +45,7 @@ function [isGenerated, stateMsg, newAccountStruct] = GenerateAccount(id, passwor
     newAccountStruct.(id).Affiliation = affiliation;
     newAccountStruct.(id).EmailName = emailName;
     newAccountStruct.(id).EmailDomain = emailDomain;
-    newAccountStruct.(id).Phone = phoneNumber;
+    newAccountStruct.(id).PhoneNumber = phoneNumber;
     isGenerated = true;
     stateMsg = 'Your account is generated successfully';
 end
