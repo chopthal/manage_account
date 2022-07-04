@@ -21,17 +21,14 @@ PASSWORD_LENGTH = 8;
 id = 'admin';
 password = GenerateRandomPassword(PASSWORD_LENGTH);
 name = '관리자';
-tier = 'admin';
+tier = 'Admin';
 emailName = 'admin';
 phoneNumber = '01012345678';
 prevAccountStruct = [];
 
 % Get data from account_forms.mat
-[isValidFormFile, msg] = ManageAccountFormAction('Check', '', '', ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
-if ~isValidFormFile
-    disp(msg);
-    return;
-end
+ManageAccountFormAction('Check', '', '', ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
+
 
 tmp = load(ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
 affiliation = tmp.(ACCOUNT_FORMS_VARIABLENAME).Affiliation{1};
