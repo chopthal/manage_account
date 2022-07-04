@@ -1,8 +1,7 @@
 function [isValid, stateMsg] = ValidatePhoneNumber(phoneNumber)
     isValid = false;
     stateMsg = '';
-    phoneNumberReg = '^[\+]{0,1}[0-9]+$'; % +, number
-    phoneNumberReg(strfind(phoneNumberReg, '-')) = '';
+    phoneNumberReg = '^[\+]{0,1}[0-9]+$'; % + (Country number init str), number    
 
     MIN_PHONENUMBER_LENGTH = 4;
     MAX_PHONENUMBER_LENGTH = 20;
