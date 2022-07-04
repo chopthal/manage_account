@@ -1,5 +1,4 @@
-Accounts.mat
-accounts.mat
+*.mat
 blacklist_10000.txt
 blacklist_100000.txt
 blacklist_1000000.txt
