@@ -20,7 +20,7 @@ function [result, msg] = ManageAccountFormAction(action, type, items, accountFor
             'Team4'
             };
     
-        mailDomain = {
+        emailDomain = {
             'gmail.com';
             'naver.com';
             'kakao.com'
@@ -28,7 +28,7 @@ function [result, msg] = ManageAccountFormAction(action, type, items, accountFor
         
         try
             tmp.(accountFormVariableName).Affiliation = affiliation;
-            tmp.(accountFormVariableName).MailDomain = mailDomain;
+            tmp.(accountFormVariableName).EmailDomain = emailDomain;
         catch
             msg = 'Invalid account form variable name';
             return;
@@ -76,7 +76,7 @@ function [result, msg] = ManageAccountFormAction(action, type, items, accountFor
     
     
     %% Business function
-    loadedVar = load('account_forms.mat');
+    loadedVar = load(accountFormFileName);
     loadedVar.(accountFormVariableName).(type) = items;
 
     try
