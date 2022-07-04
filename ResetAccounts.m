@@ -1,10 +1,11 @@
-function ResetAccounts
+function password = ResetAccounts
 
 ACCOUNTS_FILENAME = 'accounts.mat';
 ACCOUNTS_VARIABLENAME = 'Accounts';
+PASSWORD_LENGTH = 8;
 
 id = 'admin';
-password = 'rhksflwk10#';
+password = GenerateRandomPassword(PASSWORD_LENGTH);
 name = '관리자';
 tier = 'admin';
 affiliation = 'admin';
@@ -18,9 +19,5 @@ prevAccountStruct = [];
 
 tmp.(ACCOUNTS_VARIABLENAME) = newAccountStruct;
 save(ACCOUNTS_FILENAME, '-struct', 'tmp', ACCOUNTS_VARIABLENAME);
-
-% disp(isGenerated);
-% disp(stateMsg);
-% disp(newAccountStruct);
 
 end
