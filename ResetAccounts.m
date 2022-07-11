@@ -1,19 +1,27 @@
 function password = ResetAccounts(ACCOUNTS_FILENAME, ACCOUNTS_VARIABLENAME, ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME)
 
-if isempty(ACCOUNTS_FILENAME)    
+if isempty(ACCOUNTS_FILENAME)
+
     ACCOUNTS_FILENAME = 'accounts.mat';
+
 end
 
-if isempty(ACCOUNTS_VARIABLENAME)    
+if isempty(ACCOUNTS_VARIABLENAME)
+
     ACCOUNTS_VARIABLENAME = 'Accounts';
+
 end
 
-if isempty(ACCOUNT_FORMS_FILENAME)    
+if isempty(ACCOUNT_FORMS_FILENAME)
+
     ACCOUNT_FORMS_FILENAME = 'account_forms.mat';
+
 end
 
-if isempty(ACCOUNT_FORMS_VARIABLENAME)    
+if isempty(ACCOUNT_FORMS_VARIABLENAME)
+
     ACCOUNT_FORMS_VARIABLENAME = 'AccountForms';
+
 end
 
 PASSWORD_LENGTH = 8;
