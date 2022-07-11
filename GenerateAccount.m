@@ -21,22 +21,22 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     if isempty(emailName); stateMsg = 'Please enter your E-mail name'; return; end
     if isempty(emailDomain); stateMsg = 'Please enter your E-mail domain'; return; end
     if isempty(phoneNumber); stateMsg = 'Please enter your Phone number'; return; end
-    
-    [isValid, stateMsg] = ValidateId(id);
+        
+    [isValid, stateMsg] = ValidateInput('Id', id, '');
     if ~isValid; return; end
     
-    [isValid, stateMsg] = ValidatePassword(id, password);
+    [isValid, stateMsg] = ValidateInput('Password', password, id);    
     if ~isValid; return; end
 
-    [isValid, stateMsg] = ValidateName(name);
-    if ~isValid; return; end
-
-    [isValid, stateMsg] = ValidateEmailName(emailName);
+    [isValid, stateMsg] = ValidateInput('Name', name, '');
     if ~isValid; return; end
     
+    [isValid, stateMsg] = ValidateInput('EmailName', emailName, '');
+    if ~isValid; return; end
+        
+    [isValid, stateMsg] = ValidateInput('PhoneNumber', phoneNumber, '');
+    if ~isValid; return; end
     phoneNumber(strfind(phoneNumber, '-')) = ''; % Delete all '-'s
-    [isValid, stateMsg] = ValidatePhoneNumber(phoneNumber);
-    if ~isValid; return; end
     
     hashedPassword = StringToHashedHex(password);
     if isfield(prevAccountStruct, id); stateMsg = 'Exist ID'; return; end

@@ -1,4 +1,4 @@
-function hashedHex = stringToHashedHex(string)
+function hashedHex = StringToHashedHex(string)
 
 salt = 'salt';
 sha256hasher = System.Security.Cryptography.SHA256Managed;
