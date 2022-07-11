@@ -13,7 +13,7 @@ isValid = false;
 stateMsg = '';
 minLength = 0;
 maxLength = 100;
-tmp = iput;
+tmp = input;
 tmp(strfind(tmp, ' ')) = '';
 
 if isempty(tmp)
@@ -93,7 +93,7 @@ elseif strcmpi(type, 'Password')
 elseif strcmpi(type, 'PhoneNumber')
 
     minLength = 3;
-    maxLength = 20;
+    maxLength = 30;
     regExp = '^[\+]{0,1}[0-9\-]+$';
 
 end
@@ -114,7 +114,7 @@ if length(input) > maxLength
 
 end
 
-out = regexp(txt, regExp, 'match');
+out = regexp(input, regExp, 'match');
 
 if isempty(out)
     
