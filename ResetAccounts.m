@@ -28,8 +28,6 @@ prevAccountStruct = [];
 
 % Get data from account_forms.mat
 ManageAccountFormAction('Check', '', '', ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
-
-
 tmp = load(ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
 affiliation = tmp.(ACCOUNT_FORMS_VARIABLENAME).Affiliation{1};
 emailDomain = tmp.(ACCOUNT_FORMS_VARIABLENAME).EmailDomain{1};
