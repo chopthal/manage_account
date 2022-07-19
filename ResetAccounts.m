@@ -40,7 +40,7 @@ tmp = load(ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
 affiliation = tmp.(ACCOUNT_FORMS_VARIABLENAME).Affiliation{1};
 emailDomain = tmp.(ACCOUNT_FORMS_VARIABLENAME).EmailDomain{1};
 
-[isGenerated, stateMsg, newAccountStruct] =...
+[~, ~, newAccountStruct] =...
     GenerateAccount(id, password, name, tier, affiliation, emailName, emailDomain, phoneNumber, prevAccountStruct);
 
 tmp.(ACCOUNTS_VARIABLENAME) = newAccountStruct;
