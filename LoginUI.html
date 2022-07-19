@@ -33,6 +33,7 @@
         height: 50%;
         position: relative;
       }
+
       .login > div > input {
         height: 35%;
       }
@@ -45,7 +46,6 @@
         position: relative;
         width: 100%;
         height: 25%;
-        margin-top: -15px;
       }
 
       .login-button {
@@ -62,22 +62,19 @@
         background-color: aqua;
       }
 
-      .checkbox-box {
-        margin-top: 5px;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        height: 25%;
-        position: relative;
+      .eye {
+        position: absolute;
+        top: 38px;
+        bottom: 0;
+        right: 5px;
+        margin: auto 2px;
+        height: 18px;
+        cursor: pointer;
+        visibility: visible;
       }
 
-      #visualize-password-checkbox {
-        margin: 0;
-        margin-top: 3px;
-      }
-      .visualize-checkbox-label {
-        font-size: small;
-        margin-left: 3px;
+      .hidden {
+        visibility: hidden;
       }
     </style>
   </head>
@@ -87,14 +84,8 @@
         <div class="input-box">
           <input type="text" id="id-input" placeholder="ID" />
           <input type="password" id="password-input" placeholder="Password" />
-        </div>
-        <div class="checkbox-box">
-          <input type="checkbox" id="visualize-password-checkbox" />
-          <label
-            class="visualize-checkbox-label"
-            for="visualize-password-checkbox"
-            >Visualize password</label
-          >
+          <img class="eye eye-on" src="eye_on.svg" />
+          <img class="eye eye-off" src="eye_off.svg" />
         </div>
         <div class="login-button-box">
           <button class="login-button" id="login-button">Login</button>
@@ -106,17 +97,22 @@
         const loginSubmit = document.querySelector(".login");
         const id = document.querySelector("#id-input");
         const password = document.querySelector("#password-input");
+        const eyeOn = document.querySelector(".eye-on");
+        const eyeOff = document.querySelector(".eye-off");
 
-        const visualizePassword = document.querySelector(
-          "#visualize-password-checkbox"
-        );
+        password.type = "password";
+        eyeOn.classList.add("hidden");
 
-        visualizePassword.addEventListener("change", (event) => {
-          if (event.currentTarget.checked) {
-            password.type = "text";
-          } else {
-            password.type = "password";
-          }
+        eyeOn.addEventListener("click", (event) => {
+          eyeOn.classList.add("hidden");
+          eyeOff.classList.remove("hidden");
+          password.type = "password";
+        });
+
+        eyeOff.addEventListener("click", (event) => {
+          eyeOff.classList.add("hidden");
+          eyeOn.classList.remove("hidden");
+          password.type = "text";
         });
 
         id.focus();
