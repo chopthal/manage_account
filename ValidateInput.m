@@ -88,7 +88,7 @@ elseif strcmpi(type, 'Password')
 
     minLength = 8;
     maxLength = 70;
-    regExp = '[a-zA-Z0-9\:-\@\[-\`\{-\~\s]+$';
+    regExp = '[a-zA-Z0-9\!-\/\:-\@\[-\`\{-\~\s]+$';
 
 elseif strcmpi(type, 'PhoneNumber')
 
@@ -118,7 +118,7 @@ out = regexp(input, regExp, 'match');
 
 if isempty(out)
     
-    stateMsg = 'Invalid input';
+    stateMsg = sprintf('Invalid %s', type);
 
     return;
     

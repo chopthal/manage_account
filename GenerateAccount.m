@@ -49,6 +49,21 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     newAccountStruct.(id).EmailName = emailName;
     newAccountStruct.(id).EmailDomain = emailDomain;
     newAccountStruct.(id).PhoneNumber = phoneNumber;
+
+    NUM_AUTH_RESERVE = 200;
+    NUM_OPTION_RESERVE = 200;
+    authStruct = struct;
+    authStruct.Accesible = false;
+    for i = 1:NUM_AUTH_RESERVE
+        optionName = sprintf('Option%d', i);
+        authStruct.(optionName) = 1;
+    end
+
+    for i = 1:NUM_OPTION_RESERVE
+        authName = sprintf('Auth%d', i);
+        newAccountStruct.(id).Authority.(authName) = authStruct;
+    end
+
     isGenerated = true;
     stateMsg = 'Your account is generated successfully';
 end
