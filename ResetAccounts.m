@@ -43,6 +43,14 @@ emailDomain = tmp.(ACCOUNT_FORMS_VARIABLENAME).EmailDomain{1};
 [~, ~, newAccountStruct] =...
     GenerateAccount(id, password, name, tier, affiliation, emailName, emailDomain, phoneNumber, prevAccountStruct);
 
+% Add Manage Account authority
+newAccountStruct.(id).Authority.Auth5.Accessible = true;
+newAccountStruct.(id).Authority.Auth5.Option1 = 3;
+newAccountStruct.(id).Authority.Auth5.Option2 = 3;
+newAccountStruct.(id).Authority.Auth5.Option3 = 2;
+newAccountStruct.(id).Authority.Auth5.Option4 = 2;
+newAccountStruct.(id).Authority.Auth5.Option5 = 3;
+
 tmp.(ACCOUNTS_VARIABLENAME) = newAccountStruct;
 save(ACCOUNTS_FILENAME, '-struct', 'tmp', ACCOUNTS_VARIABLENAME);
 
