@@ -37,11 +37,20 @@ prevAccountStruct = [];
 % Get data from account_forms.mat
 ManageAccountFormAction('Check', '', '', ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
 tmp = load(ACCOUNT_FORMS_FILENAME, ACCOUNT_FORMS_VARIABLENAME);
-affiliation = tmp.(ACCOUNT_FORMS_VARIABLENAME).Affiliation{1};
-emailDomain = tmp.(ACCOUNT_FORMS_VARIABLENAME).EmailDomain{1};
+affiliationIndex = 1;
+emailDomainIndex = 1;
 
 [~, ~, newAccountStruct] =...
-    GenerateAccount(id, password, name, tier, affiliation, emailName, emailDomain, phoneNumber, prevAccountStruct);
+    GenerateAccount(id, password, name, tier, affiliationIndex, emailName, emailDomainIndex, phoneNumber, prevAccountStruct);
+
+% Add All authorities
+newAccountStruct.(id).Authority.Auth1.Accessible = true;
+newAccountStruct.(id).Authority.Auth1.Option1 = 4;
+newAccountStruct.(id).Authority.Auth1.Option2 = 4;
+
+newAccountStruct.(id).Authority.Auth2.Accessible = true;
+newAccountStruct.(id).Authority.Auth3.Accessible = true;
+newAccountStruct.(id).Authority.Auth4.Accessible = true;
 
 % Add Manage Account authority
 newAccountStruct.(id).Authority.Auth5.Accessible = true;

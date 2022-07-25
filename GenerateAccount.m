@@ -1,7 +1,8 @@
 function [isGenerated, stateMsg, newAccountStruct] =...
     GenerateAccount(id, password, name, tier,...
-    affiliation, emailName, emailDomain, phoneNumber,...
+    affiliationIndex, emailName, emailDomainIndex, phoneNumber,...
     prevAccountStruct)
+
     % isGenerated = GenerateAccount(id, password, tier)
     % id : string
     % password : string
@@ -10,6 +11,9 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     % affiliation : string
     % email : string
     % phone : string
+
+    NUM_AUTH_RESERVE = 200;
+    NUM_OPTION_RESERVE = 200;
     
     isGenerated = false;
     newAccountStruct = '';
@@ -17,9 +21,9 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     if isempty(password); stateMsg = 'Please enter your Password'; return; end
     if isempty(name); stateMsg = 'Please enter your Name'; return; end
     if isempty(tier); stateMsg = 'Please enter your Tier'; return; end
-    if isempty(affiliation); stateMsg = 'Please enter your Affiliation'; return; end
+    if isempty(affiliationIndex); stateMsg = 'Please enter your Affiliation'; return; end
     if isempty(emailName); stateMsg = 'Please enter your E-mail name'; return; end
-    if isempty(emailDomain); stateMsg = 'Please enter your E-mail domain'; return; end
+    if isempty(emailDomainIndex); stateMsg = 'Please enter your E-mail domain'; return; end
     if isempty(phoneNumber); stateMsg = 'Please enter your Phone number'; return; end
         
     [isValid, stateMsg] = ValidateInput('Id', id, '');
@@ -45,13 +49,11 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     newAccountStruct.(id).Password = hashedPassword;
     newAccountStruct.(id).Name = name;
     newAccountStruct.(id).Tier = tier;
-    newAccountStruct.(id).Affiliation = affiliation;
+    newAccountStruct.(id).AffiliationIndex = affiliationIndex;
     newAccountStruct.(id).EmailName = emailName;
-    newAccountStruct.(id).EmailDomain = emailDomain;
+    newAccountStruct.(id).EmailDomainIndex = emailDomainIndex;
     newAccountStruct.(id).PhoneNumber = phoneNumber;
-
-    NUM_AUTH_RESERVE = 200;
-    NUM_OPTION_RESERVE = 200;
+    
     authStruct = struct;
     authStruct.Accessible = false;
     for i = 1:NUM_AUTH_RESERVE
@@ -66,4 +68,5 @@ function [isGenerated, stateMsg, newAccountStruct] =...
 
     isGenerated = true;
     stateMsg = 'Your account is generated successfully';
+
 end
