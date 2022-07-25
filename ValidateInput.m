@@ -28,7 +28,7 @@ if strcmpi(type, 'Affiliation')
 
     minLength = 1;
     maxLength = 30;
-    regExp = '^[^\s]+[a-zA-Z가-힣0-9\s]+$';
+    regExp = '^[^\s]+[a-zA-Z가-힣0-9\_\-\s]+$';
 
 elseif strcmpi(type, 'EmailDomain')
 
