@@ -5,33 +5,121 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     
     isGenerated = false;
     newAccountStruct = '';
-    if isempty(id); stateMsg = 'Please enter your ID'; return; end
-    if isempty(password); stateMsg = 'Please enter your Password'; return; end
-    if isempty(name); stateMsg = 'Please enter your Name'; return; end
-    if isempty(tier); stateMsg = 'Please enter your Tier'; return; end
-    if isempty(affiliationIndex); stateMsg = 'Please enter your Affiliation'; return; end
-    if isempty(emailName); stateMsg = 'Please enter your E-mail name'; return; end
-    if isempty(emailDomainIndex); stateMsg = 'Please enter your E-mail domain'; return; end
-    if isempty(phoneNumber); stateMsg = 'Please enter your Phone number'; return; end
+    
+    if isempty(id)
+        
+        stateMsg = 'Please enter your ID'; 
+        
+        return; 
+    
+    end
+
+    if isempty(password)
+        
+        stateMsg = 'Please enter your Password'; 
+        
+        return; 
+    
+    end
+
+    if isempty(name)
+        
+        stateMsg = 'Please enter your Name'; 
+        
+        return; 
+    
+    end
+
+    if isempty(tier)
+        
+        stateMsg = 'Please enter your Tier'; 
+        
+        return; 
+    
+    end
+
+    if isempty(affiliationIndex)
+        
+        stateMsg = 'Please enter your Affiliation'; 
+        
+        return; 
+    
+    end
+
+    if isempty(emailName)
+        
+        stateMsg = 'Please enter your E-mail name'; 
+        
+        return; 
+    
+    end
+
+    if isempty(emailDomainIndex)
+        
+        stateMsg = 'Please enter your E-mail domain'; 
+        
+        return; 
+    
+    end
+
+    if isempty(phoneNumber)
+        
+        stateMsg = 'Please enter your Phone number'; 
+        
+        return; 
+    
+    end
         
     [isValid, stateMsg] = ValidateInput('Id', id, '');
-    if ~isValid; return; end
+
+    if ~isValid
+        
+        return; 
+    
+    end
     
     [isValid, stateMsg] = ValidateInput('Password', password, id);    
-    if ~isValid; return; end
+
+    if ~isValid
+        
+        return; 
+    
+    end
 
     [isValid, stateMsg] = ValidateInput('Name', name, '');
-    if ~isValid; return; end
+
+    if ~isValid
+        
+        return; 
+    
+    end
     
     [isValid, stateMsg] = ValidateInput('EmailName', emailName, '');
-    if ~isValid; return; end
+    
+    if ~isValid
+        
+        return; 
+    
+    end
         
     [isValid, stateMsg] = ValidateInput('PhoneNumber', phoneNumber, '');
-    if ~isValid; return; end
-    phoneNumber(strfind(phoneNumber, '-')) = ''; % Delete all '-'s
     
+    if ~isValid
+        
+        return; 
+    
+    end
+
+    phoneNumber(strfind(phoneNumber, '-')) = ''; % Delete all '-'s    
     hashedPassword = StringToHashedHex(password);
-    if isfield(prevAccountStruct, id); stateMsg = 'Exist ID'; return; end
+    
+    if isfield(prevAccountStruct, id)
+        
+        stateMsg = 'Exist ID'; 
+        
+        return; 
+    
+    end
     
     newAccountStruct = prevAccountStruct;
     newAccountStruct.(id).Password = hashedPassword;
