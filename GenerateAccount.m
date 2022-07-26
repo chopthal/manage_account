@@ -2,18 +2,6 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     GenerateAccount(id, password, name, tier,...
     affiliationIndex, emailName, emailDomainIndex, phoneNumber,...
     prevAccountStruct)
-
-    % isGenerated = GenerateAccount(id, password, tier)
-    % id : string
-    % password : string
-    % name : string
-    % tier : string
-    % affiliation : string
-    % email : string
-    % phone : string
-
-    NUM_AUTH_RESERVE = 200;
-    NUM_OPTION_RESERVE = 200;
     
     isGenerated = false;
     newAccountStruct = '';
@@ -53,20 +41,36 @@ function [isGenerated, stateMsg, newAccountStruct] =...
     newAccountStruct.(id).EmailName = emailName;
     newAccountStruct.(id).EmailDomainIndex = emailDomainIndex;
     newAccountStruct.(id).PhoneNumber = phoneNumber;
-    
-    authStruct = struct;
-    authStruct.Accessible = false;
-    for i = 1:NUM_AUTH_RESERVE
-        optionName = sprintf('Option%d', i);
-        authStruct.(optionName) = 1;
-    end
-
-    for i = 1:NUM_OPTION_RESERVE
-        authName = sprintf('Auth%d', i);
-        newAccountStruct.(id).Authority.(authName) = authStruct;
-    end
+    newAccountStruct = ReserveAuthorityField(newAccountStruct, id);
 
     isGenerated = true;
     stateMsg = 'Your account is generated successfully';
+
+end
+
+
+function reservedAccountStruct = ReserveAuthorityField(accountStruct, id)
+
+    NUM_AUTH_RESERVE = 200;
+    NUM_OPTION_RESERVE = 200;
+    
+    authStruct = struct;
+    authStruct.Accessible = false;
+    
+    for i = 1:NUM_AUTH_RESERVE
+    
+        optionName = sprintf('Option%d', i);
+        authStruct.(optionName) = 1;
+    
+    end
+    
+    for i = 1:NUM_OPTION_RESERVE
+    
+        authName = sprintf('Auth%d', i);
+        accountStruct.(id).Authority.(authName) = authStruct;
+    
+    end
+    
+    reservedAccountStruct = accountStruct;
 
 end
