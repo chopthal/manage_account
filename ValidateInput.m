@@ -1,14 +1,5 @@
 function [isValid, stateMsg] = ValidateInput(type, input, id)
 
-% Type
-% - Affiliation (input)
-% - EmailDomain (input)
-% - EmailName (input)
-% - Id (input)
-% - Name (input)
-% - Password (input : password, id)
-% - PhoneNumber (input)
-
 isValid = false;
 stateMsg = '';
 minLength = 0;
@@ -56,7 +47,6 @@ elseif strcmpi(type, 'Name')
 
 elseif strcmpi(type, 'Password')
     
-    % Including ID?
     if ~isempty(id)
 
         isContainId = contains(input, id);
@@ -72,7 +62,6 @@ elseif strcmpi(type, 'Password')
 
     end
 
-    % Black List
     tmpTable = readtable('blacklist_100000.txt');
     blackList = table2cell(tmpTable);
     isInclude = sum(strcmp(blackList, input));
@@ -123,4 +112,5 @@ if isempty(out)
     return;
     
 end
+
 isValid = true;
